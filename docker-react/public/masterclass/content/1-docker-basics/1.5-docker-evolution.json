@@ -1,0 +1,27 @@
+{
+    "id": "docker-evolution",
+    "title": "Docker Evolution and Modularization",
+    "content": [
+        { "type": "heading", "value": "The Birth of Docker (2013)", "level": 2 },
+        { "type": "text", "value": "Docker began as an internal tool at <strong>dotCloud</strong>, a PaaS company founded by Solomon Hykes. After its public debut in March 2013, it quickly became the industry standard for containerization, leading the company to rebrand as Docker, Inc." },
+        
+        { "type": "heading", "value": "Key Milestones", "level": 2 },
+        { "type": "list", "items": [
+            "<strong>2013:</strong> Docker is open-sourced.",
+            "<strong>2014:</strong> Docker 1.0 released with <code>libcontainer</code>.",
+            "<strong>2015:</strong> Open Container Initiative (OCI) is formed to create industry standards.",
+            "<strong>2016:</strong> Docker donates <code>containerd</code> to the CNCF.",
+            "<strong>2017:</strong> The Moby Project is launched to modularize the Docker platform."
+        ]},
+
+        { "type": "heading", "value": "Evolution to Modular Components", "level": 2 },
+        { "type": "text", "value": "To support the growing ecosystem and tools like Kubernetes, Docker evolved from a single monolithic binary into a set of specialized, modular components: <strong>containerd</strong> (lifecycle management), <strong>runc</strong> (the low-level runtime), and the <strong>Docker Engine</strong> (high-level API)." },
+
+        { "type": "image", "src": "/DockerImages/Docker_evolution.png", "caption": "The Evolution of Docker: From dotCloud to Modern Modular Infrastructure" },
+
+        { "type": "heading", "value": "OCI Standards", "level": 2 },
+        { "type": "text", "value": "The Open Container Initiative (OCI) ensures that containers remain portable across different platforms by defining standards for both the **Runtime** (how containers run) and the **Image Format** (how they are packaged)." }
+    ]
+}
+
+

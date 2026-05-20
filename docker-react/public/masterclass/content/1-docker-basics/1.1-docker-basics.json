@@ -1,0 +1,37 @@
+{
+    "id": "docker-basics-intro",
+    "title": "Docker Basics",
+    "content": [
+        { "type": "heading", "value": "What is Docker?", "level": 2 },
+        { "type": "text", "value": "Docker is an open-source platform designed to make it easier to create, deploy, and run applications by using containers. Think of a container as a lightweight, standalone, and executable package that includes everything an application needs to run: the code, runtime, system tools, system libraries, and settings. Because everything is packed into this single box, the application runs exactly the same way regardless of where it is deployed—whether on your personal laptop, a coworker's machine, or a massive server in the cloud." },
+        
+        { "type": "heading", "value": "Why is Docker Used?", "level": 2 },
+        { "type": "text", "value": "Docker is used primarily to solve the notorious \"It works on my machine\" problem. In traditional software development, an app might run perfectly on a developer's computer but crash on the production server because of differences in the operating system version, missing software libraries, or different configurations. Docker eliminates this inconsistency by bundling the application and its environment together. It provides isolation, meaning you can run multiple applications on the same machine without them interfering with each other." },
+        
+        { "type": "heading", "value": "Problems Solved Through Docker", "level": 2 },
+        { "type": "list", "items": [
+            "<strong>The 'It Works on My Machine' Syndrome:</strong> Standardizes environments so code runs uniformly everywhere.",
+            "<strong>Dependency Conflicts:</strong> Different applications might need different versions of the same library (e.g., Python 2 vs Python 3). Containers keep these dependencies completely separate.",
+            "<strong>Slow Deployment:</strong> Starting a traditional virtual machine can take minutes. Starting a Docker container takes seconds or less.",
+            "<strong>Resource Waste:</strong> Virtual Machines require a full operating system for each application, wasting CPU and RAM. Docker containers share the host's operating system, making them incredibly lightweight and efficient."
+        ]},
+        
+        { "type": "heading", "value": "Advantages of Docker", "level": 2 },
+        { "type": "list", "items": [
+            "<strong>Portability:</strong> Run it anywhere—on Windows, Mac, Linux, or any cloud provider.",
+            "<strong>Performance:</strong> Containers share the host OS kernel, so they use fewer resources and start up almost instantly.",
+            "<strong>Isolation:</strong> Each container runs in its own secure environment.",
+            "<strong>Scalability:</strong> It is very easy to quickly spin up hundreds of identical containers to handle high user traffic."
+        ]},
+        
+        { "type": "heading", "value": "Disadvantages of Docker", "level": 2 },
+        { "type": "list", "items": [
+            "<strong>Learning Curve:</strong> It takes time to understand containerization, Dockerfiles, and orchestration tools.",
+            "<strong>Not for All Applications:</strong> Applications with heavy graphical interfaces (GUI) or those requiring deep, low-level access to the host hardware are not ideal for Docker.",
+            "<strong>Data Persistence:</strong> By default, data inside a container is lost when the container stops. You have to explicitly use 'volumes' to save your data permanently.",
+            "<strong>Security Risks:</strong> Since containers share the host operating system, a vulnerability in the host OS kernel can potentially affect all running containers if not properly secured."
+        ]},
+        
+        { "type": "note", "value": "Docker does not replace virtual machines completely; instead, it provides a much faster and leaner alternative for running applications.", "variant": "info" }
+    ]
+}

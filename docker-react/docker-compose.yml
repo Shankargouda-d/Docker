@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  web-app:
+    build: .
+    container_name: docker-insights-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - API_KEY=docker_viz_secret_123
+      - DB_URL=mongodb://db:27017/docker_db
+    restart: always
+    volumes:
+      - app-data:/app/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/health').then(r => r.ok ? process.exit(0) : process.exit(1)).catch(() => process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      replicas: 1 # Scale this up using --scale web-app=3
+
+  db:
+    image: mongo:latest
+    container_name: docker-db
+    volumes:
+      - db-data:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  app-data:
+  db-data:

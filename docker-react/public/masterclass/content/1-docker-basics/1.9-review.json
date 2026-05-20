@@ -1,0 +1,81 @@
+{
+    "id": "docker-basics-review",
+    "title": "Section 1 Review: Docker Basics & Architecture",
+    "content": [
+        { "type": "heading", "value": "Module Summaries", "level": 2 },
+        { "type": "text", "value": "Quickly recap everything we've learned in this section." },
+        {
+            "type": "accordion",
+            "title": "Recap: Topics 1.1 to 1.8",
+            "contentBlocks": [
+                { "type": "list", "items": [
+                    "<strong>1.1 Docker Basics:</strong> Introduction to Docker as a platform to build, ship, and run apps.",
+                    "<strong>1.2 Docker Architecture:</strong> Client-Server model consisting of Docker Client, Host (Daemon), and Registry.",
+                    "<strong>1.3 Containerization:</strong> Lightweight virtualization that bundles app code with dependencies.",
+                    "<strong>1.4 Containers vs VMs:</strong> Containers share the host kernel (fast, light) while VMs virtualize hardware (heavy, secure).",
+                    "<strong>1.5 Docker Evolution:</strong> History from dotCloud to modern modular architecture (containerd, runc).",
+                    "<strong>1.6 Docker Developments:</strong> Ecosystem tools like Docker Desktop, Engine, and Hub.",
+                    "<strong>1.7 Docker Tooling:</strong> Advanced tools like Docker Machine, Compose, and Swarm.",
+                    "<strong>1.8 Basic Commands:</strong> Essential CLI commands for managing images and container lifecycles."
+                ]}
+            ]
+        },
+
+        { "type": "heading", "value": "Quick Review Questions", "level": 2 },
+        { "type": "text", "value": "Test your knowledge with these interactive questions." },
+        {
+            "type": "accordion",
+            "title": "1. What is the primary difference between a Docker Image and a Container?",
+            "icon": "help-circle",
+            "contentBlocks": [
+                { "type": "text", "value": "An **Image** is a read-only template (a blueprint), while a **Container** is a running instance of that image. You can have many containers running from a single image." }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "2. Which Linux kernel features make containerization possible?",
+            "icon": "help-circle",
+            "contentBlocks": [
+                { "type": "text", "value": "Containerization relies on **Namespaces** (for isolation) and **Cgroups** (for resource limiting)." }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "3. What is the role of the Docker Daemon?",
+            "icon": "help-circle",
+            "contentBlocks": [
+                { "type": "text", "value": "The **Docker Daemon (dockerd)** listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes." }
+            ]
+        },
+
+        { "type": "heading", "value": "Important Exam Questions (VTU Style)", "level": 2 },
+        { "type": "note", "value": "These questions are frequently asked in VTU theory exams and interviews.", "variant": "tip" },
+        {
+            "type": "accordion",
+            "title": "Q1. Compare and Contrast Virtual Machines and Containers. (8 Marks)",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "text", "value": "Focus on: Hypervisor vs Docker Engine, Guest OS vs Shared Kernel, Boot time, Resource efficiency, and Isolation levels." }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "Q2. Explain the Docker Client-Server Architecture with a neat diagram. (10 Marks)",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "text", "value": "Explain the interaction between the Client, the Docker Host (Daemon), and the Registry. Mention commands like build, pull, and run." }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "Q3. Discuss the Docker Container Life Cycle with suitable commands. (8 Marks)",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "text", "value": "Describe states: Created, Running, Paused, Stopped, and Deleted. Link them to commands: create, start, run, pause, stop, and rm." }
+            ]
+        },
+
+        { "type": "divider" },
+        { "type": "text", "value": "Congratulations! You have completed the first section of the Docker Masterclass. Ready to dive into Networking?" }
+    ]
+}

@@ -1,0 +1,409 @@
+.about-feedback-view {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 92, 246, 0.3) transparent;
+}
+
+.about-feedback-view::-webkit-scrollbar {
+    width: 6px;
+}
+
+.about-feedback-view::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.3);
+    border-radius: 4px;
+}
+
+.af-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+}
+
+.af-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.af-title {
+    font-size: 3rem !important;
+    margin-bottom: 0.75rem;
+}
+
+.af-subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.af-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+/* Common Card Styling */
+.af-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 2rem;
+    padding: 2.5rem;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.02);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.af-card:hover {
+    border-color: rgba(139, 92, 246, 0.25);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 20px rgba(139, 92, 246, 0.05);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+}
+
+.card-header h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.card-icon {
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.accent-icon {
+    background: rgba(139, 92, 246, 0.15);
+    color: var(--accent);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+}
+
+.success-icon {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--success);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}
+
+/* About Column Details */
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.lead-text {
+    font-size: 1.1rem;
+    color: var(--text);
+    font-weight: 600;
+    line-height: 1.7;
+}
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.pillar-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+}
+
+.pillar-item:hover {
+    background: rgba(139, 92, 246, 0.03);
+    border-color: rgba(139, 92, 246, 0.15);
+    transform: translateY(-2px);
+}
+
+.pillar-icon {
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+}
+
+.pillar-item h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+}
+
+.pillar-item p {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Feedback Form Styles */
+.form-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+.input-group-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-field label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+}
+
+.input-field input,
+.input-field textarea {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 0.85rem;
+    padding: 0.9rem 1.2rem;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.input-field input:focus,
+.input-field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.25), inset 0 0 8px rgba(139, 92, 246, 0.1);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.type-chips {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.type-chip {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.type-chip:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.type-chip.active {
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--text);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
+}
+
+/* Rating Stars */
+.rating-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.stars {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.star-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.15);
+    padding: 0.2rem;
+    transition: all 0.2s ease;
+}
+
+.star-btn:hover {
+    transform: scale(1.2);
+}
+
+.star-btn.active {
+    color: var(--warning);
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.4));
+}
+
+.rating-label {
+    font-size: 0.8rem;
+    color: var(--warning);
+    font-weight: 600;
+}
+
+.submit-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem !important;
+    font-size: 1rem;
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+}
+
+.submit-btn.submitting {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Success Card */
+.submission-success {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.success-check-icon {
+    color: var(--success);
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.4));
+}
+
+.submission-success h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 30%, var(--success) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.success-msg {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 400px;
+    margin-bottom: 2rem;
+}
+
+.submitted-details {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    padding: 1.25rem 2rem;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88rem;
+}
+
+.detail-row .label {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.detail-row .value {
+    color: var(--text);
+    font-weight: 700;
+}
+
+.text-warning {
+    color: var(--warning) !important;
+}
+
+.reset-btn {
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.25);
+    background: var(--success) !important;
+}
+
+.reset-btn:hover {
+    box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4) !important;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+    .af-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .af-title {
+        font-size: 2.25rem !important;
+    }
+    .af-container {
+        padding: 2rem 1rem 4rem;
+    }
+    .af-card {
+        padding: 1.75rem;
+    }
+    .pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .input-group-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}

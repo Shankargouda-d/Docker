@@ -1,0 +1,28 @@
+{
+    "id": "docker-tooling",
+    "title": "Docker Tooling",
+    "content": [
+        { "type": "heading", "value": "Introduction to Docker Tooling", "level": 2 },
+        { "type": "text", "value": "Beyond the core Docker Engine, a set of specialized tools exists to manage Docker hosts, multi-container applications, and clusters. These tools are essential for scaling and managing production environments." },
+        
+        { "type": "heading", "value": "1. Docker Machine", "level": 2 },
+        { "type": "text", "value": "**Docker Machine** is a tool that lets you install Docker Engine on virtual hosts and manage the hosts with <code>docker-machine</code> commands. You can use Machine to create Docker hosts on your local Mac or Windows box, on your company network, in your data center, or on cloud providers like AWS or Azure." },
+
+        { "type": "heading", "value": "2. Docker Compose", "level": 2 },
+        { "type": "text", "value": "**Docker Compose** is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration." },
+        { "type": "note", "value": "Compose is ideal for development, testing, and staging environments, as well as CI workflows.", "variant": "tip" },
+
+        { "type": "heading", "value": "3. Docker Swarm", "level": 2 },
+        { "type": "text", "value": "**Docker Swarm** is the native clustering and scheduling tool for Docker containers. A swarm consists of multiple Docker hosts which run in swarm mode and act as managers (to manage membership and delegation) and workers (which run swarm services)." },
+
+        { "type": "image", "src": "/DockerImages/Docker_tooling.png", "caption": "The Docker Tooling Suite: Machine, Compose, and Swarm" },
+
+        { "type": "heading", "value": "Why use these tools?", "level": 2 },
+        { "type": "list", "items": [
+            "<strong>Automation:</strong> Automate the provisioning of Docker hosts.",
+            "<strong>Simplification:</strong> Manage complex multi-container apps as a single entity.",
+            "<strong>Orchestration:</strong> Scale applications across multiple nodes with high availability."
+        ]}
+    ]
+}
+

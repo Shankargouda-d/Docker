@@ -1,0 +1,132 @@
+{
+    "id": "what-is-containerization",
+    "title": "What is Containerization",
+    "content": [
+        { "type": "heading", "value": "Introduction to Containerization", "level": 2 },
+        { "type": "text", "value": "Containerization is a lightweight alternative to full machine virtualization that involves encapsulating an application in a container with its own operating environment. This provides all the benefits of loading an application onto a virtual machine, as the application can run on any physical machine without worrying about dependencies." },
+        
+        { "type": "heading", "value": "Need for Containerization", "level": 2 },
+        { "type": "text", "value": "Before containerization, developers faced the 'it works on my machine' problem. Software that worked in development would break in production because of differences in the OS, library versions, or configurations. Containerization was needed to provide a standardized, consistent environment from development to production." },
+        
+        { "type": "heading", "value": "Working of Containerization", "level": 2 },
+        { "type": "text", "value": "Containerization works by bundling the application code together with the related configuration files, libraries, and dependencies required for it to run. This single package of software, known as a container, is abstracted away from the host operating system, and hence, it stands alone and becomes portable." },
+        
+        { "type": "heading", "value": "Features of Containerization", "level": 2 },
+        { "type": "list", "items": [
+            "<strong>Standardization:</strong> Containers follow industry standards (like OCI) ensuring they work everywhere.",
+            "<strong>Portability:</strong> Containers can easily move between local machines, physical servers, and public clouds.",
+            "<strong>Scalability:</strong> It is simple to rapidly scale up or down the number of container instances.",
+            "<strong>Version Control:</strong> Container images can be versioned, rolled back, and tracked."
+        ]},
+        
+        { "type": "heading", "value": "Advantages of Containerization", "level": 2 },
+        { "type": "list", "items": [
+            "<strong>Consistency:</strong> Identical environments across Dev, Test, and Prod.",
+            "<strong>Efficiency:</strong> Less resource overhead compared to VMs.",
+            "<strong>Speed:</strong> Containers can spin up in milliseconds.",
+            "<strong>Agility:</strong> Faster time-to-market for new features."
+        ]},
+        
+        { "type": "heading", "value": "Limitations of Containerization", "level": 2 },
+        { "type": "list", "items": [
+            "<strong>Security:</strong> Since containers share the host kernel, a kernel vulnerability could affect all containers on that host.",
+            "<strong>Complexity:</strong> Orchestrating thousands of containers requires complex tools like Kubernetes.",
+            "<strong>Data Persistence:</strong> By default, container data is ephemeral and disappears when the container stops, requiring external volume management."
+        ]},
+        
+        { "type": "heading", "value": "Applications of Containerization", "level": 2 },
+        { "type": "list", "items": [
+            "<strong>Microservices:</strong> Breaking down monolithic apps into smaller, manageable services.",
+            "<strong>CI/CD Pipelines:</strong> Automating testing and deployment.",
+            "<strong>Cloud-Native Apps:</strong> Building apps specifically designed for cloud environments.",
+            "<strong>Hybrid Cloud:</strong> Moving workloads seamlessly between on-premise and public clouds."
+        ]},
+
+        { "type": "heading", "value": "Containers and Isolation", "level": 2 },
+        { "type": "text", "value": "Containers achieve isolation using two main Linux kernel features: <strong>Namespaces</strong> (which isolate processes, networks, and mount points) and <strong>Cgroups</strong> (which limit and isolate resource usage like CPU and memory). This ensures that one container cannot interfere with another." },
+
+        { "type": "heading", "value": "Lightweight Nature of Containers", "level": 2 },
+        { "type": "text", "value": "Unlike Virtual Machines which require a full, heavy 'Guest OS' to be installed for each application, containers share the host machine's kernel. They only include the specific binaries and libraries necessary for the application. This makes them extremely small (often just megabytes) and highly efficient." },
+
+        { "type": "heading", "value": "Docker Container Life Cycle", "level": 2 },
+        { "type": "simulation", "id": "container-lifecycle", "label": "Interactive Simulation: Docker Container Lifecycle" },
+
+        { "type": "heading", "value": "Practice Questions", "level": 2 },
+        {
+            "type": "accordion",
+            "title": "1. Discuss the problems solved by using Docker and containers",
+            "icon": "help-circle",
+            "contentBlocks": [
+                {
+                    "type": "text",
+                    "value": "Docker and containers solve several problems in software development and deployment:"
+                },
+                {
+                    "type": "list",
+                    "ordered": true,
+                    "items": [
+                        "<strong>Environment Consistency:</strong> Containers ensure that applications run the same way in development, testing, and production environments. This eliminates the \"it works on my machine\" problem.",
+                        "<strong>Dependency Management:</strong> Containers package all dependencies, libraries, and configurations needed for an application to run. This avoids conflicts between different versions of libraries and dependencies.",
+                        "<strong>Resource Efficiency:</strong> Containers are lightweight and share the host OS kernel, making them more efficient in terms of resource usage compared to traditional virtual machines.",
+                        "<strong>Scalability:</strong> Containers can be easily scaled up or down to handle varying loads. This makes it easier to manage and deploy applications in a microservices architecture.",
+                        "<strong>Isolation:</strong> Containers provide process and network isolation, ensuring that applications run in their own isolated environments. This enhances security and stability.",
+                        "<strong>Portability:</strong> Containers can run on any system that supports Docker, making it easy to move applications between different environments and platforms.",
+                        "<strong>Continuous Integration and Continuous Deployment (CI/CD):</strong> Containers streamline the CI/CD process by providing a consistent environment for building, testing, and deploying applications.",
+                        "<strong>Simplified Management:</strong> Docker provides tools for managing containers, images, and networks, making it easier to deploy and manage applications."
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "2. Describe what difference does Docker bring to Containers",
+            "icon": "help-circle",
+            "contentBlocks": [
+                {
+                    "type": "text",
+                    "value": "Docker brings several key differences and advantages to containers:"
+                },
+                {
+                    "type": "list",
+                    "ordered": true,
+                    "items": [
+                        "<strong>Ease of Use:</strong> Docker simplifies the process of creating, deploying, and managing containers. It provides a user-friendly interface and a set of tools that make it easy to work with containers.",
+                        "<strong>Portability:</strong> Docker containers can run on any system that supports Docker, making it easy to move applications between different environments and platforms. This ensures consistency across development, testing, and production environments.",
+                        "<strong>Isolation:</strong> Docker containers provide process and network isolation, ensuring that applications run in their own isolated environments. This enhances security and stability.",
+                        "<strong>Resource Efficiency:</strong> Docker containers are lightweight and share the host OS kernel, making them more efficient in terms of resource usage compared to traditional virtual machines.",
+                        "<strong>Scalability:</strong> Docker makes it easy to scale applications up or down to handle varying loads. This is particularly useful in a microservices architecture where different components of an application can be scaled independently.",
+                        "<strong>Integration with CI/CD:</strong> Docker integrates seamlessly with continuous integration and continuous deployment (CI/CD) pipelines, making it easier to automate the build, test, and deployment processes.",
+                        "<strong>Community and Ecosystem:</strong> Docker has a large and active community, as well as a rich ecosystem of tools and services that extend its functionality. This includes Docker Hub, a repository of pre-built container images that can be easily pulled and used."
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "With a neat diagram describe Docker Container Life Cycle.",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "image", "src": "/DockerImages/Container_lifecycle.jpg", "caption": "Docker Container Life Cycle Diagram" },
+                {
+                    "type": "text",
+                    "value": "The Docker Container Life Cycle involves the following key stages:"
+                },
+                {
+                    "type": "list",
+                    "ordered": true,
+                    "items": [
+                        "<strong>Create:</strong> The container is created from a Docker image but is not yet running. This is done using the docker create command.<br><code style='color:var(--accent)'>docker create --name &lt;container_name&gt; &lt;image_name&gt;</code>",
+                        "<strong>Start:</strong> The container is started using the docker start command. The container begins executing its main process.<br><code style='color:var(--accent)'>docker start &lt;container_name/id&gt;</code>",
+                        "<strong>Running:</strong> The container is in a running state, executing its main process. This is the active state where the container performs its intended tasks.<br><code style='color:var(--accent)'>docker run -it -d --name &lt;container_name&gt; &lt;image_name&gt;</code>",
+                        "<strong>Pause:</strong> The container's processes are paused using the docker pause command. The container remains in memory but does not execute any processes.<br><code style='color:var(--accent)'>docker pause &lt;container_name/id&gt;</code>",
+                        "<strong>Unpause:</strong> The container's processes are resumed using the docker unpause command. The container returns to the running state.<br><code style='color:var(--accent)'>docker unpause &lt;container_name/id&gt;</code>",
+                        "<strong>Stop:</strong> The container is stopped using the docker stop command. The container's main process is terminated, and the container is no longer running.<br><code style='color:var(--accent)'>docker stop &lt;container_name/id&gt;</code>",
+                        "<strong>Restart:</strong> The container is restarted using the docker restart command. This stops and then starts the container again.<br><code style='color:var(--accent)'>docker restart &lt;container_name/id&gt;</code>",
+                        "<strong>Kill:</strong> The container is forcefully terminated using the docker kill command. This immediately stops the container's main process.<br><code style='color:var(--accent)'>docker kill &lt;container_name/id&gt;</code>",
+                        "<strong>Remove:</strong> The container is removed using the docker rm command. This deletes the container from the Docker host.<br><code style='color:var(--accent)'>docker rm &lt;container_name/id&gt;</code>"
+                    ]
+                }
+            ]
+        }
+    ]
+}

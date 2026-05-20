@@ -1,0 +1,77 @@
+{
+    "id": "docker-mount-types",
+    "title": "Types of Docker Mounts",
+    "content": [
+        { "type": "heading", "value": "6. Types of Docker Mounts", "level": 2 },
+        { "type": "text", "value": "To persist data beyond the lifecycle of a container, Docker provides three main types of mounts: Volumes, Bind Mounts, and Tmpfs Mounts." },
+
+        { "type": "divider" },
+
+        { "type": "heading", "value": "A. Volumes", "level": 2 },
+        { "type": "heading", "value": "Characteristics", "level": 3 },
+        { "type": "list", "items": [
+            "Managed entirely by Docker (stored in <code>/var/lib/docker/volumes/</code>).",
+            "Can be Named or Anonymous.",
+            "Provides persistent storage.",
+            "Supports volume drivers for cloud storage."
+        ]},
+        { "type": "heading", "value": "Use Cases", "level": 3 },
+        { "type": "list", "items": [
+            "Data persistence across container restarts and removals.",
+            "Sharing data safely among multiple running containers.",
+            "Backup, restore, and migration operations."
+        ]},
+        { "type": "code", "value": "Container\n     ↓\nDocker Volume\n     ↓\nHost Storage", "label": "Volume Architecture" },
+        { "type": "simulation", "id": "docker-volume-sim", "label": "Interactive Simulation: Volume Persistence" },
+
+        { "type": "divider" },
+
+        { "type": "heading", "value": "B. Bind Mounts", "level": 2 },
+        { "type": "heading", "value": "Characteristics", "level": 3 },
+        { "type": "list", "items": [
+            "Managed by the Host system.",
+            "Direct link between a host folder and a container folder.",
+            "Very fast performance.",
+            "Potential security concerns as containers can modify host system files."
+        ]},
+        { "type": "heading", "value": "Use Cases", "level": 3 },
+        { "type": "list", "items": [
+            "Sharing configuration files from the host to containers.",
+            "Development lifecycle (sharing source code so changes reflect immediately without rebuilding).",
+            "General data sharing between host and container."
+        ]},
+        { "type": "code", "value": "Host Folder\n      ↔\nContainer Folder", "label": "Bind Mount Architecture" },
+        { "type": "simulation", "id": "docker-bind-sim", "label": "Interactive Simulation: Bind Mount Linking" },
+
+        { "type": "divider" },
+
+        { "type": "heading", "value": "C. Tempfs Mounts", "level": 2 },
+        { "type": "heading", "value": "Characteristics", "level": 3 },
+        { "type": "list", "items": [
+            "Stored only in the host's memory (RAM).",
+            "Extremely fast read/write speeds.",
+            "Used for sensitive data (passwords, keys).",
+            "No cleanup needed (data is lost when container stops)."
+        ]},
+        { "type": "heading", "value": "Use Cases", "level": 3 },
+        { "type": "list", "items": [
+            "Storing runtime temporary data.",
+            "I/O intensive applications that do not need persistence."
+        ]},
+        { "type": "code", "value": "RAM Memory\n     ↓\nContainer", "label": "Tmpfs Architecture" },
+        { "type": "simulation", "id": "docker-tmpfs-sim", "label": "Interactive Simulation: Temporary Storage" },
+
+        { "type": "divider" },
+
+        { "type": "accordion", "icon": "double-star", "title": "Discuss the types of docker mount with a neat diagram", "contentBlocks": [
+            { "type": "text", "value": "<strong>Docker Mounts:</strong> Docker mounts are used to attach directories from the host machine to the container, enabling data persistence and sharing between the host and the container." },
+            { "type": "image", "src": "/DockerImages/docker-mount.jpg", "caption": "Docker Mounts Diagram" },
+            { "type": "heading", "value": "Types of Docker Mounts", "level": 3 },
+            { "type": "list", "items": [
+                "<strong>1. Volumes</strong><ul><li>Storing data outside of the container's filesystem.</li><li>Created and managed by Docker.</li><li>Can be named or anonymous.</li><li>Supports volume drivers.</li><li>Decoupled from the host file system.</li><li>Provides persistent storage.</li><li>Suitable for sharing data across containers and for backup and restore.</li></ul>",
+                "<strong>2. Bind Mounts</strong><ul><li>Linking a specific directory on your host machine to a container.</li><li>Data is stored on the host machine.</li><li>Directly accessible by the host (coupled).</li><li>Created by Docker if specified during container creation.</li><li>Can have security implications.</li><li>Suitable for sharing configuration files and for DevOps build lifecycles (development and testing).</li></ul>",
+                "<strong>3. Tmpfs Mounts</strong><ul><li>Storing non-persistent data that is only needed during the container's runtime.</li><li>Stores data only in memory.</li><li>Provides extremely fast access.</li><li>Non-persistent: Only during runtime.</li><li>Data is lost when the container stops or restarts.</li><li>No cleanup needed.</li><li>Suitable for I/O sensitive projects and storing sensitive data temporarily.</li></ul>"
+            ]}
+        ]}
+    ]
+}

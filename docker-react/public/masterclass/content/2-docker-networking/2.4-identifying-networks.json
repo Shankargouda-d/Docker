@@ -1,0 +1,49 @@
+{
+    "id": "identifying-networks",
+    "title": "Identifying Container Networks",
+    "content": [
+        { "type": "heading", "value": "Basics of Identifying Networks", "level": 2 },
+        { "type": "text", "value": "Understanding which network a container is connected to is essential for troubleshooting connectivity issues and ensuring security isolation. Docker provides several built-in commands to query the network state of both containers and the host system." },
+
+        { "type": "heading", "value": "How to Identify Which Network Mode is Being Used by a Container", "level": 2 },
+        { "type": "text", "value": "Docker provides commands to check the network attached to a container. A user can identify whether the container uses **bridge, host, none, or custom network mode**." },
+
+        { "type": "divider" },
+
+        { "type": "subheading", "value": "1. docker inspect <container>", "level": 3 },
+        { "type": "text", "value": "<strong>Purpose:</strong> Used to display detailed information about a container, including its networking settings, IP addresses, and gateway configuration." },
+        { "type": "code", "value": "docker inspect <container_name>", "label": "Syntax" },
+        { "type": "text", "value": "<strong>What to Check?</strong> Look for the <code>\"NetworkSettings\"</code> section. Inside it, you will find <code>\"Networks\"</code>. If <code>\"bridge\"</code> appears, the container uses Bridge Network Mode." },
+        { "type": "note", "variant": "info", "value": "<strong>Student Understanding:</strong> Think of it as checking the container's <strong>network identity card</strong>." },
+
+        { "type": "subheading", "value": "2. docker network ls", "level": 3 },
+        { "type": "text", "value": "<strong>Purpose:</strong> Lists all Docker networks available in the system." },
+        { "type": "code", "value": "docker network ls", "label": "Syntax" },
+        { "type": "text", "value": "<strong>Meaning:</strong> This command helps you know what 'roads' (networks) exist in Docker. Default networks include <code>bridge</code>, <code>host</code>, and <code>none</code>." },
+        { "type": "note", "variant": "tip", "value": "<strong>Student Understanding:</strong> Think of this as showing all <strong>available roads</strong> for containers to travel." },
+
+        { "type": "subheading", "value": "3. docker network inspect <network_name>", "level": 3 },
+        { "type": "text", "value": "<strong>Purpose:</strong> Shows detailed information about a specific network, including all containers currently connected to it." },
+        { "type": "code", "value": "docker network inspect <network_name>", "label": "Syntax" },
+        { "type": "text", "value": "<strong>What It Shows:</strong> Connected containers, network type, IP range, gateway, and configuration details." },
+        { "type": "note", "variant": "info", "value": "<strong>Student Understanding:</strong> Think of it as checking the <strong>details of one particular road</strong>." },
+
+        { "type": "heading", "value": "Interactive Simulation: The Discovery Flow", "level": 2 },
+        { "type": "text", "value": "Follow the flow below to see how these commands work together to identify and explore container networks." },
+        { "type": "simulation", "id": "identify-network-sim", "label": "Interactive Command Flow" },
+
+        { "type": "heading", "value": "One-Line Exam Definition", "level": 2 },
+        { "type": "note", "variant": "tip", "value": "A user can identify the network mode of a container using Docker commands such as <code>docker inspect</code>, <code>docker network ls</code>, and <code>docker network inspect</code>. These commands display network details and connected container information." },
+
+        { "type": "divider" },
+
+        { "type": "accordion", "icon": "star", "title": "Show how a user can identify which network mode is being used by a container.", "contentBlocks": [
+            { "type": "text", "value": "To identify which network mode is being used by a Docker container, you can use the following commands:" },
+            { "type": "list", "items": [
+                "<strong>1. Inspect the container:</strong><br><code>docker inspect &lt;container_name/id&gt;</code><br>This command provides detailed information about the container, including its network settings.",
+                "<strong>2. List all networks:</strong><br><code>docker network ls</code><br>This command lists all the networks available on the Docker host.",
+                "<strong>3. Inspect a specific network:</strong><br><code>docker network inspect &lt;network_name&gt;</code><br>This command provides detailed information about a specific network, including which containers are connected to it."
+            ]}
+        ]}
+    ]
+}

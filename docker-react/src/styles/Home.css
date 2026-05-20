@@ -1,0 +1,30 @@
+.hero-container {
+    height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; padding: 2rem;
+}
+
+.glow-title {
+    font-size: 5rem; font-weight: 900; margin-bottom: 1rem;
+    background: linear-gradient(to bottom right, #fff, var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.4));
+}
+
+.hero-grid { display: grid; grid-template-columns: repeat(4, 260px); gap: 1.5rem; }
+
+.glowing-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    padding: 2rem 1.5rem; border-radius: 2rem; cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative; overflow: hidden; backdrop-filter: blur(10px);
+    text-decoration: none; color: inherit;
+}
+
+.glowing-card:hover {
+    transform: translateY(-12px) scale(1.02); border-color: var(--accent);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px var(--accent-glow);
+}
+
+.glowing-card svg { color: var(--accent); margin-bottom: 1rem; }
+.glowing-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+.glowing-card p { color: var(--text-muted); font-size: 0.8rem; }

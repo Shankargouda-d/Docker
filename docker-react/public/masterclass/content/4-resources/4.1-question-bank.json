@@ -1,0 +1,20 @@
+{
+    "id": "question-bank",
+    "title": "CS44 Question Bank",
+    "content": [
+        { "type": "heading", "value": "Official CS44 Question Bank", "level": 2 },
+        { "type": "text", "value": "This question bank contains the most important topics and questions aligned with the CS44 syllabus for your final exams and viva." },
+        
+        { "type": "divider" },
+
+        { "type": "heading", "value": "View Online", "level": 3 },
+        { "type": "pdf", "url": "/pdfs/Question_bank.pdf", "label": "CS44 Question Bank PDF" },
+
+        { "type": "divider" },
+
+        { "type": "heading", "value": "Download for Offline Use", "level": 3 },
+        { "type": "download", "url": "/pdfs/Question_bank.pdf", "label": "Download Question Bank (PDF)", "filename": "CS44_Docker_Question_Bank.pdf" },
+
+        { "type": "note", "variant": "tip", "value": "<strong>Preparation Tip:</strong> Focus on the networking and storage diagrams as they are frequently asked in the theory exams." }
+    ]
+}

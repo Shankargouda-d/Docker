@@ -1,0 +1,56 @@
+{
+    "id": "volumes-hands-on",
+    "title": "Hands-on Practices",
+    "content": [
+        { "type": "heading", "value": "7. Hands-on / Practical Sessions", "level": 2 },
+        { "type": "text", "value": "Now let's look at the practical commands you need to execute for each of the storage concepts we discussed." },
+
+        { "type": "divider" },
+
+        { "type": "heading", "value": "Practical 1: Default Filesystem Data Loss", "level": 3 },
+        { "type": "list", "ordered": true, "items": [
+            "Run a container interactively: <code>docker run -it --name test_container ubuntu bash</code>",
+            "Create a file inside the container: <code>touch /sample.txt</code>",
+            "Exit the container: <code>exit</code>",
+            "Delete the container: <code>docker rm test_container</code>",
+            "Run a new container: <code>docker run -it ubuntu bash</code>",
+            "Check for the file: <code>ls /sample.txt</code> (It will be missing)"
+        ]},
+        { "type": "note", "variant": "warning", "value": "<strong>Conclusion:</strong> Default filesystem is temporary." },
+
+        { "type": "divider" },
+
+        { "type": "heading", "value": "Practical 2: Volume Persistence", "level": 3 },
+        { "type": "list", "ordered": true, "items": [
+            "Create a Docker volume: <code>docker volume create myvol</code>",
+            "Run container with volume attached: <code>docker run -it -v myvol:/data --name test_vol_container ubuntu bash</code>",
+            "Create a file in the volume path: <code>touch /data/test.txt</code>",
+            "Exit and delete the container: <code>exit</code> and then <code>docker rm test_vol_container</code>",
+            "Run a new container using the same volume: <code>docker run -it -v myvol:/data ubuntu bash</code>",
+            "Check for the file: <code>ls /data/test.txt</code> (The file still exists!)"
+        ]},
+        { "type": "note", "variant": "info", "value": "<strong>Conclusion:</strong> Docker Volumes provide persistent data storage." },
+
+        { "type": "divider" },
+
+        { "type": "heading", "value": "Practical 3: Bind Mount Linking", "level": 3 },
+        { "type": "list", "ordered": true, "items": [
+            "Identify a host folder, e.g., <code>/Documents/project</code>",
+            "Run container linking the host folder: <code>docker run -it -v /Documents/project:/app ubuntu bash</code>",
+            "Create a file in the host folder.",
+            "Check inside the container: <code>ls /app</code> (The file appears instantly in the container)"
+        ]},
+        { "type": "note", "variant": "info", "value": "<strong>Conclusion:</strong> Bind Mounts create a direct link between host and container directories." },
+
+        { "type": "divider" },
+
+        { "type": "heading", "value": "Practical 4: Tempfs Temporary Storage", "level": 3 },
+        { "type": "list", "ordered": true, "items": [
+            "Run a container with a tmpfs mount: <code>docker run -it --tmpfs /temp --name test_tmpfs ubuntu bash</code>",
+            "Create a file in the temp folder: <code>touch /temp/secret.txt</code>",
+            "Stop and start the container: <code>exit</code> then <code>docker start -i test_tmpfs</code>",
+            "Check for the file: <code>ls /temp/secret.txt</code> (The file disappears)"
+        ]},
+        { "type": "note", "variant": "info", "value": "<strong>Conclusion:</strong> Tempfs provides fast, temporary, memory-only storage." }
+    ]
+}

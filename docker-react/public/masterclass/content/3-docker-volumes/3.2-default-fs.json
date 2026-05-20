@@ -1,0 +1,22 @@
+{
+    "id": "default-fs",
+    "title": "Default Docker File System",
+    "content": [
+        { "type": "heading", "value": "5. Default Docker File System", "level": 2 },
+        { "type": "text", "value": "By default, Docker stores data <strong>inside the container's writable layer</strong>." },
+        
+        { "type": "heading", "value": "Characteristics", "level": 3 },
+        { "type": "list", "items": [
+            "Data is stored in the writable container layer.",
+            "There is no static external path (it is host dependent).",
+            "<strong>No container = No data.</strong>",
+            "Uses UnionFS to manage the layers."
+        ]},
+
+        { "type": "heading", "value": "The Problem with Default Storage", "level": 3 },
+        { "type": "text", "value": "If the container is deleted, the writable layer is also deleted, resulting in permanent data loss." },
+        { "type": "code", "value": "Container Deleted\n        ↓\nData Deleted", "label": "The Default Behavior" },
+
+        { "type": "simulation", "id": "docker-fs-sim", "label": "Interactive Simulation: Default Storage Data Loss" }
+    ]
+}

@@ -1,0 +1,115 @@
+{
+    "id": "basic-commands",
+    "title": "Basic Docker Commands",
+    "content": [
+        { "type": "heading", "value": "Introduction to Docker CLI", "level": 2 },
+        { "type": "text", "value": "The Docker Command Line Interface (CLI) is the primary way developers interact with Docker. These commands allow you to manage the entire lifecycle of images and containers. Below, we have categorized the most essential commands you need to master for the VTU curriculum." },
+        
+        { "type": "heading", "value": "1. Docker Information Commands", "level": 2 },
+        { "type": "text", "value": "Use these commands to verify your Docker installation and system state." },
+        {
+            "type": "accordion",
+            "title": "docker --version / docker version",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "text", "value": "<strong>Usage:</strong> Checks the installed Docker version on your system." },
+                { "type": "code", "value": "docker --version", "label": "Terminal" },
+                { "type": "text", "value": "<em>Tip:</em> Use <code>docker version</code> (without dashes) to see detailed information about both the client and server components." }
+            ]
+        },
+
+        { "type": "heading", "value": "2. Docker Image Commands", "level": 2 },
+        { "type": "text", "value": "These commands are used to manage Docker Images, which are the blueprints for your containers." },
+        {
+            "type": "accordion",
+            "title": "docker pull",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "text", "value": "<strong>Usage:</strong> Downloads a specific image from a registry (usually Docker Hub) to your local machine." },
+                { "type": "code", "value": "docker pull <image_name>", "label": "Example: docker pull nginx" }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "docker images",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "text", "value": "<strong>Usage:</strong> Lists all the Docker images currently stored on your local system." },
+                { "type": "code", "value": "docker images", "label": "Terminal" }
+            ]
+        },
+
+        { "type": "heading", "value": "3. Container Lifecycle Commands", "level": 2 },
+        { "type": "text", "value": "These commands manage the active instances of your images. Click each command to see its specific feature." },
+        
+        {
+            "type": "accordion",
+            "title": "docker run",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "text", "value": "<strong>Usage:</strong> Creates and starts a new container from an image. If the image isn't local, it pulls it first." },
+                { "type": "code", "value": "docker run -d --name my-container nginx", "label": "Example" }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "docker ps",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "text", "value": "<strong>Usage:</strong> Lists running containers. Use <code>-a</code> to see all containers (including stopped ones)." },
+                { "type": "code", "value": "docker ps -a", "label": "Terminal" }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "docker exec",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "text", "value": "<strong>Usage:</strong> Runs a new command inside an already running container. Commonly used to open a shell." },
+                { "type": "code", "value": "docker exec -it <container_id> bash", "label": "Example" }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "docker stop / docker kill",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "text", "value": "<strong>docker stop:</strong> Gracefully shuts down a container by sending a SIGTERM signal." },
+                { "type": "text", "value": "<strong>docker kill:</strong> Forcefully stops a container by sending a SIGKILL signal." },
+                { "type": "code", "value": "docker stop <container_name>\ndocker kill <container_name>", "label": "Terminal" }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "docker pause / docker unpause",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "text", "value": "<strong>docker pause:</strong> Suspends all processes in a container." },
+                { "type": "text", "value": "<strong>docker unpause:</strong> Resumes all processes in a previously paused container." }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "docker restart",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "text", "value": "<strong>Usage:</strong> Restarts a container that is either running or stopped." }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "docker rm",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "text", "value": "<strong>Usage:</strong> Removes one or more stopped containers from the system." },
+                { "type": "code", "value": "docker rm <container_id>", "label": "Terminal" }
+            ]
+        },
+
+        { "type": "heading", "value": "Visualizing the Lifecycle", "level": 2 },
+        { "type": "text", "value": "The diagram and interactive simulation below show how these commands move a container through its different states." },
+        { "type": "image", "src": "/DockerImages/Container_lifecycle.jpg", "caption": "The complete Docker Container Lifecycle states." },
+        { "type": "simulation", "id": "container-lifecycle", "label": "Interactive Simulation: Command Flow" }
+    ]
+}
+

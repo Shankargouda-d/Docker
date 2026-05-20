@@ -1,0 +1,41 @@
+{
+    "id": "networking-intro",
+    "title": "Introduction to Docker Networking",
+    "content": [
+        { "type": "heading", "value": "Meaning of Docker Networking", "level": 2 },
+        { "type": "text", "value": "Docker networking allows containers to communicate with each other, with the host machine, and with external networks (like the Internet). It is the mechanism that enables isolated containers to function as a unified application stack." },
+        
+        { "type": "heading", "value": "Need for Docker Networking", "level": 2 },
+        { "type": "text", "value": "In a modern microservices architecture, applications are broken down into multiple services (e.g., a frontend, a backend, and a database). For these services to work together, they must be able to exchange data. Docker networking provides the secure, isolated channels necessary for this communication." },
+        
+        { "type": "heading", "value": "Communication Types", "level": 2 },
+        { "type": "list", "items": [
+            "<strong>Communication between Containers:</strong> Containers on the same host can talk to each other using internal IP addresses or container names (DNS).",
+            "<strong>Communication with External Systems:</strong> Containers can reach out to external APIs or databases, and external users can access services running inside containers."
+        ]},
+
+        { "type": "image", "src": "/DockerImages/Docker_networking_overview.png", "caption": "Overview of Docker Networking: Container-to-Container and External Communication." },
+
+        { "type": "heading", "value": "Container Services and Accessibility", "level": 2 },
+        { "type": "subheading", "value": "Port Exposure and Mapping" },
+        { "type": "text", "value": "By default, containers are isolated. To make a service (like a web server on port 80) accessible from the outside world, you must **map** a port on the host machine to the port inside the container." },
+        { "type": "code", "value": "docker run -p 8080:80 nginx", "label": "Example: Map Host 8080 to Container 80" },
+        
+        { "type": "simulation", "id": "docker-networking-sim", "label": "Interactive Simulation: Port Mapping & Traffic Flow" },
+
+        { "type": "subheading", "value": "Network Isolation", "level": 2 },
+        { "type": "text", "value": "Docker uses 'Namespaces' to ensure that each container has its own network stack (interfaces, routing tables, and IP addresses) that is completely isolated from other containers unless explicitly connected." },
+
+        { "type": "heading", "value": "Container Network Components", "level": 2 },
+        { "type": "list", "items": [
+            "<strong>IP Address:</strong> Every container is assigned a private IP address within the Docker network.",
+            "<strong>Gateway:</strong> The bridge (usually <code>docker0</code>) that acts as the entry/exit point for traffic leaving the container network.",
+            "<strong>DNS Services:</strong> Docker provides a built-in DNS server that allows containers to resolve each other by name.",
+            "<strong>Routing Table:</strong> Manages how packets are directed within the container network and to the external world."
+        ]},
+
+        { "type": "heading", "value": "Importance of Docker Networking", "level": 2 },
+        { "type": "text", "value": "Effective networking is critical for **Scalability**, **Security**, and **High Availability**. It allows for load balancing, secure data isolation, and the seamless deployment of distributed systems across multiple environments." }
+    ]
+}
+

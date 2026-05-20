@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Insights | System Dashboard</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --accent: #38bdf8;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            padding: 2rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .card-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            word-break: break-all;
+        }
+
+        .feature-list {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 1.5rem;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-list h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .feature-list ul {
+            list-style: none;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .feature-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .loader {
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .pulse {
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            animation: pulse 1s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0; }
+        }
+
+        [v-cloak] { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="badge">Docker Environment Detected</div>
+            <h1>System Insights</h1>
+            <p>Real-time data from your isolated container instance.</p>
+        </div>
+
+        <div id="dashboard" class="grid">
+            <div class="loader" id="loader">
+                <div class="pulse"></div>
+            </div>
+        </div>
+
+        <div class="feature-list">
+            <h2>Why Docker?</h2>
+            <ul>
+                <li><strong>Isolation:</strong> Notice the "Hostname" below—it's not your PC name, it's a unique Container ID.</li>
+                <li><strong>Consistency:</strong> The "Node Version" is exactly what we locked in the Dockerfile.</li>
+                <li><strong>Portability:</strong> This exact environment can be shipped to any server in seconds.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        async function fetchSystemInfo() {
+            try {
+                const response = await fetch('/api/system-info');
+                const data = await response.json();
+                
+                const dashboard = document.getElementById('dashboard');
+                dashboard.innerHTML = `
+                    <div class="card">
+                        <span class="card-label">Container Hostname</span>
+                        <div class="card-value">${data.hostname}</div>
+                    </div>
+                    <div class="card">
+                        <span class="card-label">Operating System</span>
+                        <div class="card-value">${data.platform} (${data.arch})</div>
+                    </div>
+                    <div class="card">
+                        <span class="card-label">Node.js Version</span>
+                        <div class="card-value">${data.nodeVersion}</div>
+                    </div>
+                    <div class="card">
+                        <span class="card-label">CPU Cores</span>
+                        <div class="card-value">${data.cpuCount}</div>
+                    </div>
+                    <div class="card">
+                        <span class="card-label">Total Memory</span>
+                        <div class="card-value">${data.totalMemory}</div>
+                    </div>
+                    <div class="card">
+                        <span class="card-label">Container Uptime</span>
+                        <div class="card-value">${data.uptime}</div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error fetching system info:', error);
+                document.getElementById('dashboard').innerHTML = '<p style="color: #ef4444">Error loading data. Is the server running?</p>';
+            }
+        }
+
+        // Fetch data on load
+        fetchSystemInfo();
+        // Refresh every 30 seconds
+        setInterval(fetchSystemInfo, 30000);
+    </script>
+</body>
+</html>

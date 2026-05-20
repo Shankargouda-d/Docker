@@ -1,0 +1,97 @@
+{
+    "id": "network-types",
+    "title": "Types of Docker Networks",
+    "content": [
+        { "type": "heading", "value": "What are the networks available to Docker containers?", "level": 2 },
+        { "type": "text", "value": "Docker uses network drivers to manage container communication. Below are the primary network types available in Docker:" },
+
+        { "type": "subheading", "value": "1. None Network", "level": 3 },
+        { "type": "text", "value": "Used when your container doesn’t provide a service over the network and requires complete network isolation." },
+        { "type": "list", "items": [
+            "The container isn’t provided with a network interface or an IP address.",
+            "Within the container, only the <strong>loopback device</strong> (localhost) is created.",
+            "Maximum security and isolation from all external and internal traffic."
+        ]},
+        { "type": "code", "value": "docker run -d --network none --name testApp nginx", "label": "Run container with no network" },
+
+        { "type": "subheading", "value": "2. Host Network", "level": 3 },
+        { "type": "text", "value": "Used when you would like to use the Docker host’s network stack directly, removing isolation between the host and the container." },
+        { "type": "list", "items": [
+            "Services running on any port within your container will be directly accessible through the host’s IP.",
+            "<strong>Performance:</strong> Offers better performance as it avoids the Docker NAT (Network Address Translation).",
+            "<strong>Note:</strong> Published ports (<code>-p</code> option) are discarded and do not work in host mode."
+        ]},
+        { "type": "code", "value": "docker run -d --network host --name nginx_on_host nginx", "label": "Run container on Host network" },
+
+        { "type": "subheading", "value": "3. Bridge Network (Default)", "level": 3 },
+        { "type": "text", "value": "This is the default network driver. If you don't specify a driver, this is the one used." },
+        { "type": "list", "items": [
+            "Used for standalone containers that need to communicate.",
+            "Containers on the default bridge can communicate via IP addresses.",
+            "Needs “linking” (<code>--link</code>) for legacy container DNS resolution (deprecated in favor of user-defined bridges)."
+        ]},
+        { "type": "code", "value": "docker run -d --network bridge --name nginx_bridge nginx\ndocker run -d --network bridge -p 8080:80 --name nginx_on_bridge_with_port nginx", "label": "Using the Default Bridge" },
+
+        { "type": "subheading", "value": "4. User-Defined Bridge", "level": 3 },
+        { "type": "text", "value": "Recommended for production. It provides better isolation and interoperability than the default bridge." },
+        { "type": "list", "items": [
+            "Used when you have a requirement for multiple networks on your Docker host.",
+            "Allows you to isolate different deployments of containers on the same host.",
+            "Provides <strong>automatic DNS resolution</strong> between containers by name."
+        ]},
+        { "type": "code", "value": "docker network create --driver bridge isolated_nw01\ndocker run -d --network isolated_nw01 -p 8080:80 --name nginx_ud_bridge nginx", "label": "Creating and using a User-Defined Bridge" },
+
+        { "type": "subheading", "value": "5. Overlay Network (Swarm)", "level": 3 },
+        { "type": "text", "value": "Used for <strong>Multihost networking</strong> across Docker hosts that are part of a Swarm cluster." },
+        { "type": "list", "items": [
+            "Enables containers on different physical or virtual hosts to talk to each other as if they were on the same network.",
+            "Handles routing and encryption of traffic between nodes automatically."
+        ]},
+
+        { "type": "subheading", "value": "6. Overlay (External Key-Value)", "level": 3 },
+        { "type": "text", "value": "Used for multihost networking without Swarm, requiring an external key-value store (like Consul, Etcd, or ZooKeeper)." },
+        { "type": "text", "value": "To configure, modify the Docker service file (<code>/lib/systemd/system/docker.service</code>):" },
+        { "type": "code", "value": "-H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --cluster-store=consul://<consul_IP>:8500 --cluster-advertise=<node_IP>:2385", "label": "Docker Service Configuration" },
+        { "type": "text", "value": "Reload the configuration:" },
+        { "type": "code", "value": "systemctl daemon-reload", "label": "Reload Systemd" },
+        { "type": "text", "value": "You can now create and use overlay networks across nodes:" },
+        { "type": "code", "value": "# On all nodes:\ndocker network create --driver overlay mhn01\n\n# Node 1:\ndocker run -itd --network mhn01 --name=container1 busybox\n\n# Node 2:\ndocker run -itd --network mhn01 --name=container2 busybox", "label": "Cross-Node Communication" },
+
+        { "type": "subheading", "value": "7. Macvlan Network", "level": 3 },
+        { "type": "text", "value": "Macvlan networks allow you to assign a MAC address to a container, making it appear as a physical device on your network." },
+        { "type": "list", "items": [
+            "Used for legacy applications that need to be directly connected to the physical network.",
+            "Traffic is routed by the Docker daemon to the container based on its MAC address.",
+            "Requires the host network interface to be in <strong>promiscuous mode</strong>."
+        ]},
+        { "type": "code", "value": "docker network create -d macvlan \\\n  --subnet=192.168.1.0/24 \\\n  --gateway=192.168.1.1 \\\n  -o parent=eth0 pub_net", "label": "Creating a Macvlan network" },
+
+        { "type": "subheading", "value": "8. Custom Network Plugins", "level": 3 },
+        { "type": "text", "value": "If the built-in networking options do not fit your specific requirements, Docker allows you to use or write your own network plugins using the Docker Plugin API." },
+        { "type": "list", "items": [
+            "<strong>Third-party Plugins:</strong> Popular options include <strong>Weave</strong>, <strong>Calico</strong>, <strong>Cilium</strong>, and <strong>Kuryr</strong>.",
+            "<strong>Flexibility:</strong> Custom plugins can provide features like advanced security policies, multi-cloud connectivity, and specialized load balancing."
+        ]},
+        { "type": "heading", "value": "Resources & Documentation", "level": 4 },
+        { "type": "list", "items": [
+            "<strong>Docker Plugin API:</strong> <a href='https://docs.docker.com/engine/extend/plugins_network/' target='_blank'>Extending Docker with Network Plugins</a>",
+            "<strong>Sample Plugin:</strong> <a href='https://www.weave.works/docs/net/latest/introducing-weave/' target='_blank'>Introducing Weave Net</a>",
+            "<strong>Developer Guide:</strong> <a href='https://docs.docker.com/engine/extend/legacy_plugins/#/writing-a-plugin' target='_blank'>Help with Writing Plugins</a>"
+        ]},
+
+        { "type": "divider" },
+
+        { "type": "accordion", "icon": "star", "title": "Describe different types of networks available for docker and containers.", "contentBlocks": [
+            { "type": "list", "items": [
+                "<strong>None:</strong> No network interface or IP address is provided to the container. Useful when the container doesn't need to provide a service over the network.",
+                "<strong>Host:</strong> The container uses the Docker host's network stack, making services running on any port within the container directly accessible through the host's IP.",
+                "<strong>Bridge (default):</strong> Containers are connected to a private internal network on the Docker host. This is the default network type and requires linking for container DNS resolution.",
+                "<strong>Bridge (user-defined):</strong> Allows for multiple networks on the Docker host, useful for isolating different deployments of containers.",
+                "<strong>Overlay:</strong> An overlay network uses software virtualization to create additional layers of network abstraction running on top of a physical network. Used for multi-host network communication.",
+                "<strong>Overlay (swarm):</strong> Enables multi-host networking across Docker hosts that are part of a swarm.",
+                "<strong>Overlay (external key-value mechanism):</strong> Similar to the swarm overlay but uses an external key-value store for cluster management.",
+                "<strong>Custom network plugin:</strong> If the existing networking options don't fit your needs, you can write your own network plugin using the Docker plugin API."
+            ]}
+        ]}
+    ]
+}

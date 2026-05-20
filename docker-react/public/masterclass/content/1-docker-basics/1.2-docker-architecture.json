@@ -1,0 +1,153 @@
+{
+    "id": "docker-architecture",
+    "title": "Docker Architecture",
+    "content": [
+        { "type": "text", "value": "Docker uses a client-server architecture. The Docker client talks to the Docker daemon, which does the heavy lifting of building, running, and distributing your Docker containers. The Docker client and daemon can run on the same system, or you can connect a Docker client to a remote Docker daemon. They communicate using a REST API over UNIX sockets or a network interface." },
+        { "type": "heading", "value": "Core Components", "level": 2 },
+        { "type": "list", "items": [
+            "<strong>1. The Docker Client:</strong> This is the primary way that many Docker users interact with Docker. When you use commands such as <code>docker build</code>, <code>docker pull</code>, or <code>docker run</code>, the client sends these commands to the daemon, which carries them out.",
+            "<strong>2. The Docker Host:</strong> The Docker daemon (<code>dockerd</code>) lives on the host and listens for Docker API requests. It manages Docker objects such as images, containers, networks, and volumes. It is responsible for instantiating images and creating containers.",
+            "<strong>3. Docker Registries:</strong> A Docker registry stores Docker images. Docker Hub is a public registry that anyone can use, and Docker is configured to look for images on Docker Hub by default. It contains images like Ubuntu, Redis, and NGINX."
+        ]},
+        { "type": "heading", "value": "How the Commands Work", "level": 2 },
+        { "type": "list", "items": [
+            "<strong>docker build:</strong> The client tells the daemon to build an image from a Dockerfile. The daemon creates the image and stores it locally.",
+            "<strong>docker pull:</strong> The client tells the daemon to fetch an image from a Registry (like Docker Hub) and store it in the local host's Images section.",
+            "<strong>docker run:</strong> The client tells the daemon to run a container. If the image isn't available locally, the daemon pulls it from the registry, stores it, and then spins up the container."
+        ]},
+        { "type": "note", "value": "Play with the interactive simulation below to see exactly how a <code>docker run</code> command flows through the Client, Host, and Registry!", "variant": "tip" },
+        { "type": "simulation", "id": "docker-arch", "label": "Interactive Simulation: Docker Architecture" },
+        {
+            "type": "accordion",
+            "title": "With a neat diagram explain the architecture of dockers.",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "image", "src": "/DockerImages/Docker_architecture.jpg", "caption": "Docker Architecture Diagram" },
+                { "type": "text", "value": "<strong>1. Docker Client:</strong> The Docker client is the primary interface for users to interact with Docker. It sends commands to the Docker daemon using the Docker CLI (Command Line Interface). Common commands include docker run, docker build, and docker pull.<br><br><strong>2. Docker Daemon (Docker Engine):</strong> The Docker daemon, also known as the Docker Engine, is the core component of Docker. It listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes. The daemon communicates with the operating system's kernel to create and manage containers.<br><br><strong>3. Docker Images:</strong> Docker images are read-only templates that contain the application code, runtime, libraries, and dependencies needed to run an application. Images are used to create Docker containers. They can be built from a Dockerfile or pulled from a Docker registry.<br><br><strong>4. Docker Containers:</strong> Containers are lightweight, portable, and isolated environments that run applications. They are created from Docker images and share the host OS kernel. Containers provide process and file system isolation, ensuring that applications run consistently across different environments.<br><br><strong>5. Docker Registries:</strong> Docker registries are repositories that store Docker images. The most common registry is Docker Hub, a public registry where users can share and access images. Private registries can also be set up for internal use.<br><br><strong>6. Dockerfile:</strong> A Dockerfile is a text document that contains a set of instructions for building a Docker image. It specifies the base image, application code, dependencies, and configuration settings needed to create the image." }
+            ]
+        },
+        { "type": "simulation", "id": "docker-workflow", "label": "Interactive Simulation: Docker Workflow" },
+        {
+            "type": "accordion",
+            "title": "Illustrate basic workflow of the docker with a suitable diagram.",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "image", "src": "/DockerImages/Docker_workflow.jpg", "caption": "Docker Workflow Diagram" },
+                { "type": "text", "value": "Here's a basic workflow of Docker:" },
+                {
+                    "type": "list",
+                    "ordered": true,
+                    "items": [
+                        "<strong>Develop:</strong> Developers write code and create a Dockerfile that defines the application's environment, dependencies, and configuration.",
+                        "<strong>Build:</strong> The Dockerfile is used to build a Docker image. This image contains the application code and all necessary dependencies.",
+                        "<strong>Test:</strong> The Docker image is tested in a container to ensure that the application works as expected. Automated tests can be run to verify functionality.",
+                        "<strong>Push:</strong> Once the image passes testing, it is pushed to a Docker registry (e.g., Docker Hub) for storage and distribution.",
+                        "<strong>Deploy:</strong> The Docker image is pulled from the registry and deployed to production environments. Containers are created from the image and run the application.",
+                        "<strong>Monitor:</strong> The running containers are monitored for performance, errors, and other metrics. Logs and monitoring tools are used to track the application's health.",
+                        "<strong>Update:</strong> When updates or changes are made to the application code, the Dockerfile is updated, and a new Docker image is built.",
+                        "<strong>Redeploy:</strong> The updated Docker image is pushed to the registry and redeployed to the production environment. Containers running the old version are replaced with containers running the new version."
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "Illustrate workflow of the docker with App Updates / Changes with a suitable diagram",
+            "icon": "star",
+            "contentBlocks": [
+                { "type": "image", "src": "/DockerImages/Docker_workflow_appupdate.jpg", "caption": "Docker Workflow with App Updates/Changes Diagram" },
+                { "type": "text", "value": "<strong>Docker Workflow with App Updates/Changes</strong>" },
+                {
+                    "type": "list",
+                    "ordered": true,
+                    "items": [
+                        "<strong>Develop:</strong> Developers write code and create a Dockerfile that defines the application's environment, dependencies, and configuration.",
+                        "<strong>Build:</strong> The Dockerfile is used to build a Docker image. This image contains the application code and all necessary dependencies.<br><code style='color:var(--accent)'>docker build &lt;image_name&gt;:&lt;tag&gt;</code>",
+                        "<strong>Test:</strong> The Docker image is tested in a container to ensure that the application works as expected. Automated tests can be run to verify functionality.",
+                        "<strong>Push:</strong> Once the image passes testing, it is pushed to a Docker registry (e.g., Docker Hub) for storage and distribution.<br><code style='color:var(--accent)'>docker push &lt;repository_name&gt;:&lt;tag&gt;</code>",
+                        "<strong>Deploy:</strong> The Docker image is pulled from the registry and deployed to production environments. Containers are created from the image and run the application.<br><code style='color:var(--accent)'>docker pull &lt;image_name&gt;</code>",
+                        "<strong>Monitor:</strong> The running containers are monitored for performance, errors, and other metrics. Logs and monitoring tools are used to track the application's health.<br><code style='color:var(--accent)'>docker diff &lt;container_id&gt;</code>",
+                        "<strong>Update:</strong> When updates or changes are made to the application code, the Dockerfile is updated, and a new Docker image is built.<br><code style='color:var(--accent)'>docker update &lt;container_id&gt;</code>",
+                        "<strong>Redeploy:</strong> The updated Docker image is pushed to the registry and redeployed to the production environment. Containers running the old version are replaced with containers running the new version.<br><code style='color:var(--accent)'>docker pull &lt;image_name&gt;</code>"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "accordion",
+            "title": "Example: Updating our DockerDemo React App — Step-by-Step with Commands",
+            "icon": "double-star",
+            "contentBlocks": [
+                { "type": "text", "value": "Suppose you made changes in your React app (<code>Explorer.jsx</code>) and now want to update the Docker app. Let's go <strong>step by step, command by command</strong> using our own <strong>DockerDemo React App</strong>." },
+                { "type": "divider" },
+
+                { "type": "heading", "value": "Step 1: Develop (Edit Code)", "level": 3 },
+                { "type": "text", "value": "You change your React file: <code>src/pages/Explorer.jsx</code>. For example, you add a <strong>new command feature or button</strong>." },
+                { "type": "text", "value": "At this stage, changes are only on <strong>your local computer</strong>. No Docker command yet." },
+                { "type": "divider" },
+
+                { "type": "heading", "value": "Step 2: Build New Docker Image", "level": 3 },
+                { "type": "code", "value": "docker build -t myrepo/dockerdemo-react:v2 .", "label": "Command" },
+                { "type": "text", "value": "<strong>What this command does:</strong> Docker reads the <strong>Dockerfile</strong> and creates a <strong>new image</strong>. Think of it as: <code>Code + Dependencies = Docker Image</code>" },
+                { "type": "text", "value": "<strong>Breakdown of every part:</strong>" },
+                { "type": "list", "items": [
+                    "<code style='color:var(--accent)'>docker build</code> — Means: <em>\"Create a Docker image\"</em>.",
+                    "<code style='color:var(--accent)'>-t</code> — Means <strong>tag (name)</strong> the image. The tag <code>myrepo/dockerdemo-react:v2</code> breaks down as:<br><code>myrepo</code> → Docker Hub username/repository<br><code>dockerdemo-react</code> → Project name<br><code>v2</code> → Version number (because the app changed from v1 to v2).",
+                    "<code style='color:var(--accent)'>.</code> (dot) — Means: <em>\"Use current folder\"</em>. Docker searches this folder for: <code>Dockerfile</code>, <code>package.json</code>, <code>src/</code> folder."
+                ]},
+                { "type": "text", "value": "<strong>Internally what happens:</strong> Docker reads Dockerfile → Installs dependencies → Copies React code → Builds app → Creates image <code>myrepo/dockerdemo-react:v2</code>." },
+                { "type": "code", "value": "docker images", "label": "Verify with" },
+                { "type": "text", "value": "You will see:<br><code>REPOSITORY &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TAG</code><br><code>myrepo/dockerdemo-react &nbsp;&nbsp; v2</code>" },
+                { "type": "divider" },
+
+                { "type": "heading", "value": "Step 3: Test Locally", "level": 3 },
+                { "type": "code", "value": "docker run -d -p 3000:3000 myrepo/dockerdemo-react:v2", "label": "Command" },
+                { "type": "text", "value": "<strong>What happens:</strong> Docker converts the image into a <strong>running container</strong>. Think: <code>Image = Blueprint</code> and <code>Container = Running App</code>." },
+                { "type": "text", "value": "<strong>Breakdown of every part:</strong>" },
+                { "type": "list", "items": [
+                    "<code style='color:var(--accent)'>docker run</code> — Means: <em>\"Start a container\"</em>.",
+                    "<code style='color:var(--accent)'>-d</code> — Means: <em>\"Run in background\"</em>. Without <code>-d</code>, your terminal gets blocked. With <code>-d</code>, you can still use the terminal.",
+                    "<code style='color:var(--accent)'>-p 3000:3000</code> — Means <strong>port mapping</strong>. Format: <code>PC_PORT : CONTAINER_PORT</code>. So your laptop's port 3000 ↓ maps to ↓ Container's port 3000. Browser can access: <code>localhost:3000</code>.",
+                    "<code style='color:var(--accent)'>myrepo/dockerdemo-react:v2</code> — Which image to run."
+                ]},
+                { "type": "code", "value": "docker ps", "label": "Check running container" },
+                { "type": "text", "value": "Open browser → <code>http://localhost:3000</code> → Test: Did the new feature work? If yes → continue." },
+                { "type": "divider" },
+
+                { "type": "heading", "value": "Step 4: Push to Docker Hub", "level": 3 },
+                { "type": "code", "value": "docker push myrepo/dockerdemo-react:v2", "label": "Command" },
+                { "type": "text", "value": "<strong>What happens:</strong> Your image uploads to <strong>Docker Hub</strong> (cloud storage for Docker images). Like GitHub is for code, Docker Hub is for images." },
+                { "type": "list", "items": [
+                    "<strong>Before push:</strong> Image exists only on your PC.",
+                    "<strong>After push:</strong> Image is available online. Anyone can download it with: <code style='color:var(--accent)'>docker pull myrepo/dockerdemo-react:v2</code>"
+                ]},
+                { "type": "divider" },
+
+                { "type": "heading", "value": "Step 5: Update Production Server", "level": 3 },
+                { "type": "text", "value": "Suppose the server is already running old version (<code>v1</code>). You want new version (<code>v2</code>)." },
+
+                { "type": "heading", "value": "5.1 Pull latest image", "level": 4 },
+                { "type": "code", "value": "docker pull myrepo/dockerdemo-react:v2", "label": "Command" },
+                { "type": "text", "value": "Meaning: <em>Download the latest image</em>. The server now has the new version." },
+
+                { "type": "heading", "value": "5.2 Stop old container", "level": 4 },
+                { "type": "code", "value": "docker stop container_id", "label": "Command" },
+                { "type": "text", "value": "Meaning: <em>Stop old running app</em>. Find container ID with <code style='color:var(--accent)'>docker ps</code>. Example: <code>docker stop abc123</code>." },
+
+                { "type": "heading", "value": "5.3 Remove old container", "level": 4 },
+                { "type": "code", "value": "docker rm container_id", "label": "Command" },
+                { "type": "text", "value": "Meaning: <em>Delete the old container</em>. Example: <code>docker rm abc123</code>. Why? Because the old container still uses old code." },
+
+                { "type": "heading", "value": "5.4 Run new version", "level": 4 },
+                { "type": "code", "value": "docker run -d -p 3000:3000 myrepo/dockerdemo-react:v2", "label": "Command" },
+                { "type": "text", "value": "Meaning: <em>Start the updated app</em>. Now production server uses <code>v2</code> instead of <code>v1</code>." },
+                { "type": "divider" },
+
+                { "type": "heading", "value": "Full Flow Summary", "level": 3 },
+                { "type": "code", "value": "1. Edit code\n       ↓\n2. docker build\n       ↓\n3. docker run (test locally)\n       ↓\n4. docker push\n       ↓\n5. docker pull (server)\n       ↓\n6. docker stop old container\n       ↓\n7. docker rm old container\n       ↓\n8. docker run new container", "label": "Complete Pipeline" },
+                { "type": "note", "value": "<strong>Real meaning in one line:</strong> Change code → Build image → Test → Upload → Replace old app with new app.", "variant": "tip" },
+                { "type": "simulation", "id": "docker-workflow", "label": "▶ Simulate This Entire Workflow Step-by-Step" }
+            ]
+        }
+    ]
+}

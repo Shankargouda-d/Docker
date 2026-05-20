@@ -1,0 +1,48 @@
+{
+    "id": "storage-basics",
+    "title": "Introduction to Docker Storage",
+    "content": [
+        { "type": "heading", "value": "1. Introduction to Docker Storage", "level": 2 },
+        { "type": "text", "value": "Containers are designed to be temporary and ephemeral. If a container is removed, any data it created is also lost. Docker storage solves this problem by allowing data to be stored safely outside the container's lifecycle." },
+        { "type": "code", "value": "Container Removed → Data Lost", "label": "The Problem" },
+        { "type": "code", "value": "Persistent Storage Required!", "label": "The Solution" },
+
+        { "type": "heading", "value": "2. Linux Volumes", "level": 2 },
+        { "type": "text", "value": "Docker internally stores container data inside the Linux filesystem of the host machine." },
+        { "type": "list", "items": [
+            "<strong>Common Location:</strong> <code>/var/lib/docker/</code>",
+            "This main directory stores Images, Containers, Volumes, and Metadata."
+        ]},
+
+        { "type": "heading", "value": "3. Storage Drivers (Overlay / AUFS)", "level": 2 },
+        { "type": "text", "value": "Docker uses <strong>storage drivers</strong> to manage image layers efficiently. A storage driver helps to read files, write files, and combine layers together seamlessly." },
+        { "type": "list", "items": [
+            "<strong>Common Drivers:</strong> <code>overlay2</code> (default and recommended) and <code>aufs</code>."
+        ]},
+
+        { "type": "heading", "value": "4. Overlay File System in Docker", "level": 2 },
+        { "type": "text", "value": "Docker images are built using a layered approach. The Overlay File System (OverlayFS) merges these layers into a single unified view for the container." },
+        { "type": "code", "value": "Ubuntu Base Layer\n        ↓\nNginx Layer\n        ↓\nApp Layer", "label": "Layered Architecture" },
+        { "type": "text", "value": "When a container starts, Docker creates a Read-Only Layer and a Writable Layer, presenting them as a Merged View." },
+        { "type": "code", "value": "Upperdir (Container Changes - Writable)\n            ↑\nMerged View (What container sees)\n            ↓\nLowerdir (Image Files - Read-Only)", "label": "Overlay File System Structure" },
+        { "type": "list", "items": [
+            "<strong>Lowerdir:</strong> Read-only image layer.",
+            "<strong>Upperdir:</strong> Writable container layer.",
+            "<strong>Merged:</strong> Combined view shown to the container."
+        ]},
+
+        { "type": "divider" },
+
+        { "type": "accordion", "icon": "star", "title": "Explain why a docker needs a Union File System.", "contentBlocks": [
+            { "type": "text", "value": "Docker uses a Union File System (UFS) to efficiently manage and layer file systems. Here’s why it’s essential:" },
+            { "type": "list", "items": [
+                "<strong>1. Layering:</strong> UFS allows Docker to create layers for each change made to a container. When you build a Docker image, each instruction in the Dockerfile creates a new layer. These layers are stacked on top of each other, forming a single unified file system.",
+                "<strong>2. Efficiency:</strong> By using layers, Docker can reuse existing layers across multiple containers. This reduces the amount of storage needed and speeds up the build process since only the new layers need to be created and stored.",
+                "<strong>3. Copy-on-Write:</strong> UFS supports the copy-on-write mechanism, meaning that when a container writes to a file, a copy of the file is created in the container’s writable layer. This ensures that the original file remains unchanged, allowing multiple containers to share the same base image without interfering with each other.",
+                "<strong>4. Isolation:</strong> Each container gets its own isolated file system, which is a combination of the base image layers and the container’s writable layer. This isolation ensures that changes made in one container do not affect other containers.",
+                "<strong>5. Performance:</strong> UFS provides good performance by allowing containers to share common layers and only creating new layers when necessary. This reduces the overhead associated with creating and managing containers."
+            ]},
+            { "type": "text", "value": "<strong>Overall</strong>, the Union File System is a key component of Docker’s architecture, enabling efficient storage, isolation, and management of container file systems." }
+        ]}
+    ]
+}

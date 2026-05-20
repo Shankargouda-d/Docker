@@ -1,0 +1,56 @@
+{
+    "id": "using-networks",
+    "title": "Using Networks",
+    "content": [
+        { "type": "heading", "value": "Introduction to Using Networks", "level": 2 },
+        { "type": "text", "value": "Using Docker networks effectively is about defining how your services interact with each other and the outside world. By using specific flags during container creation, you can control the visibility, accessibility, and communication channels of your applications. This allows you to create complex architectures while maintaining security and performance." },
+
+        { "type": "heading", "value": "What are the ways in which we configure containers to be accessible?", "level": 2 },
+        
+        { "type": "subheading", "value": "--network", "level": 3 },
+        { "type": "text", "value": "Used to connect your container to a specific network stack." },
+        { "type": "list", "items": [
+            "Tells Docker which network driver or user-defined network the container should join.",
+            "Example: <code>--network isolated_nw</code> connects the container to a specific bridge or overlay network."
+        ]},
+
+        { "type": "subheading", "value": "-p (Publish)", "level": 3 },
+        { "type": "text", "value": "Tells Docker to 'publish' specific ports on your container to the host’s ports." },
+        { "type": "list", "items": [
+            "Maps a host port to a container port (e.g., <code>8080:80</code>).",
+            "This makes the service inside the container accessible to external traffic via the host's IP address."
+        ]},
+
+        { "type": "subheading", "value": "-P (Publish All)", "level": 3 },
+        { "type": "text", "value": "Tells Docker to publish 'All' the container’s active ports to the host." },
+        { "type": "list", "items": [
+            "Automatically maps all exposed ports in the Dockerfile to high-numbered ephemeral ports on the host.",
+            "Useful for quick testing when you don't want to manually manage port numbers."
+        ]},
+
+        { "type": "subheading", "value": "--link", "level": 3 },
+        { "type": "text", "value": "The legacy way of establishing DNS registration for created containers in new containers." },
+        { "type": "list", "items": [
+            "Allows a new container to resolve the name of an existing container to its IP address.",
+            "Still relevant when using the default bridge network, though user-defined networks (which have automatic DNS) are preferred."
+        ]},
+
+        { "type": "divider" },
+
+        { "type": "accordion", "icon": "star", "title": "Explain the various ways in which a user can configure containers to be accessible.", "contentBlocks": [
+            { "type": "list", "items": [
+                "<strong>1. --network:</strong> Connect your container to a specific network stack.",
+                "<strong>2. -p (Publish):</strong> Map specific container ports to the host (e.g., <code>-p 8080:80</code>).",
+                "<strong>3. -P (Publish All):</strong> Map all exposed ports to random high ports on the host.",
+                "<strong>4. --link:</strong> Legacy DNS registration for the default bridge network.",
+                "<strong>Port Mapping:</strong> Manually mapping host ports to container ports.\n<code>docker run -d -p 8080:80 --name my_container nginx</code>",
+                "<strong>Host Network:</strong> Sharing the host's network stack directly.\n<code>docker run -d --network host --name my_container nginx</code>",
+                "<strong>Bridge Network:</strong> Using the default Docker bridge for internal communication.\n<code>docker run -d --network bridge --name my_container nginx</code>",
+                "<strong>User-Defined Bridge:</strong> Custom bridge networks for isolated deployments.\n<code>docker network create my_bridge && docker run -d --network my_bridge nginx</code>",
+                "<strong>Overlay Network:</strong> For multi-host communication in Docker Swarm.\n<code>docker network create --driver overlay my_overlay</code>",
+                "<strong>DNS Configuration:</strong> Setting custom DNS servers.\n<code>docker run -d --dns 8.8.8.8 nginx</code>",
+                "<strong>Environment Variables:</strong> Configuring network settings via variables.\n<code>docker run -d --name my_container -e DB_HOST=db_srv nginx</code>"
+            ]}
+        ]}
+    ]
+}
