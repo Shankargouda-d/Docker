@@ -10,6 +10,7 @@ export default function AboutFeedback() {
     const [message, setMessage] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState('');
 
     const feedbackTypes = [
         { label: '💡 Suggestion', value: 'Suggestion' },
@@ -18,16 +19,31 @@ export default function AboutFeedback() {
         { label: '💖 Love It!', value: 'Love' }
     ];
 
-    const handleSubmit = (e) => {
+    // Loaded from .env file (not pushed to git)
+    const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!name || !email || !message) return;
 
         setIsSubmitting(true);
-        // Simulate a sleek submission transition
-        setTimeout(() => {
+        setSubmitError('');
+
+        try {
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, type, rating, message }),
+            });
+
             setIsSubmitting(false);
             setSubmitted(true);
-        }, 1200);
+        } catch (error) {
+            setIsSubmitting(false);
+            setSubmitError('Failed to send feedback. Please try again.');
+            console.error('Feedback submission error:', error);
+        }
     };
 
     const handleReset = () => {
@@ -202,6 +218,12 @@ export default function AboutFeedback() {
                                         </>
                                     )}
                                 </button>
+
+                                {submitError && (
+                                    <p style={{ color: 'var(--error)', fontSize: '0.85rem', marginTop: '0.75rem', textAlign: 'center' }}>
+                                        ⚠️ {submitError}
+                                    </p>
+                                )}
                             </form>
                         ) : (
                             <div className="submission-success animate-pop">
