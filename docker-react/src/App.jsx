@@ -6,6 +6,7 @@ import Advanced from './pages/Advanced';
 import Explorer from './pages/Explorer';
 import Masterclass from './pages/Masterclass';
 import AboutFeedback from './pages/AboutFeedback';
+import Installation from './pages/Installation';
 
 export default function App() {
     return (
@@ -17,6 +18,7 @@ export default function App() {
                 <Route path="/advanced" element={<Advanced />} />
                 <Route path="/explorer" element={<Explorer />} />
                 <Route path="/masterclass" element={<Masterclass />} />
+                <Route path="/installation" element={<Installation />} />
                 <Route path="/about" element={<AboutFeedback />} />
             </Routes>
         </>

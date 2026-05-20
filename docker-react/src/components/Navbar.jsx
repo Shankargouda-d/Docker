@@ -15,6 +15,7 @@ export default function Navbar() {
                 <NavLink to="/lab" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Visual Lab</NavLink>
                 <NavLink to="/advanced" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Advanced</NavLink>
                 <NavLink to="/explorer" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Explorer</NavLink>
+                <NavLink to="/installation" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Installation</NavLink>
                 <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>About & Feedback</NavLink>
             </div>
             <div className="nav-right"></div>
